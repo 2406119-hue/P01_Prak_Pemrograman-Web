@@ -11,8 +11,10 @@
 - Konfigurasi identitas Git global.
 
 ### Spesifikasi Perangkat
+
 **Informasi Prangkat:**
-I=====================================================================I
+
+I=====================================================================
 Current Date/Time     : Wednesday, 30 September 2026, 15:32:50
 Computer Name         : DESKTOP-OBTUH6S
 Operating System      : Windows 11 Pro 64-bit (10.0, Build 26200)
@@ -27,6 +29,7 @@ DirectX Version       : DirectX 12
 I=====================================================================I
 
 **Informasi Versi Shoftware:**
+
 I========================I
 - nodejs - v24.21.0
 - Laragon - v11.19.10.0
