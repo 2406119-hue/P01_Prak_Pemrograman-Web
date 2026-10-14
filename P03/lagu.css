@@ -181,3 +181,10 @@ hr {
         padding: 20px;
     }
 }
+
+.lagu{
+    border-radius: 12px;
+    background-color: #C62828;
+    color: #fbfcfd;
+
+}

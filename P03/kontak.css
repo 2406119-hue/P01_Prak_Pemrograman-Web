@@ -180,3 +180,10 @@ hr {
         padding: 20px;
     }
 }
+
+.pesan{
+    border-radius: 12px;
+    background-color: #C62828;
+    color: #fbfcfd;
+
+}
