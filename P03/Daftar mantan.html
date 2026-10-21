@@ -1,7 +1,6 @@
+
 <!DOCTYPE html>
-
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,39 +12,54 @@
 
 <header>
     <h1>Daftar Mantan Saya</h1>
+    <p>Semua punya cerita, semua punya kenangan.</p>
 </header>
 
 <hr>
 
 <main>
-
     <section class="Mantan">
         <h2>Daftar Mantan</h2>
 
-        <ol>
+        <!-- Fitur Searching -->
+        <input
+            type="text"
+            id="searchMantan"
+            placeholder="Cari mantan berdasarkan nama..."
+        >
 
-            <li>
-                <h3>Mantan 1</h3>
-                <p><strong>Nama:</strong> [Davina Karamoy]</p>
-                <p><strong>Status:</strong> Kenangan</p>
-            </li>
+        <!-- Fitur Tambah Mantan -->
+        <h2>Tambah Mantan</h2>
 
-            <li>
-                <h3>Mantan 2</h3>
-                <p><strong>Nama:</strong> [Anya Geraldin]</p>
-                <p><strong>Status:</strong> Sudah Move On</p>
-            </li>
+        <form id="formMantan">
+            <label for="nama">Nama:</label>
+            <input
+                type="text"
+                id="nama"
+                placeholder="Masukkan nama mantan"
+                required
+            >
 
-            <li>
-                <h3>Mantan 3</h3>
-                <p><strong>Nama:</strong> [Ayu Tingting]</p>
-                <p><strong>Status:</strong> Tinggal Kenangan</p>
-            </li>
+            <label for="status">Status:</label>
+            <select id="status" required>
+                <option value="">Pilih status</option>
+                <option value="Kenangan">Kenangan</option>
+                <option value="Sudah Move On">Sudah Move On</option>
+                <option value="Teman">Teman</option>
+                <option value="Tinggal Kenangan">Tinggal Kenangan</option>
+            </select>
 
-        </ol>
+            <button type="submit">Tambah Mantan</button>
+        </form>
 
+        <!-- Daftar Mantan -->
+        <h2>Daftar Kenangan</h2>
+        <ol id="daftarMantan"></ol>
+
+        <p id="pesanKosong" hidden>
+            Mantan tidak ditemukan.
+        </p>
     </section>
-
 </main>
 
 <hr>
@@ -54,6 +68,120 @@
     <p>&copy; 2026 Daftar Mantan Naupal - All Rights Reserved.</p>
 </footer>
 
-</body>
+<script>
+    // Data awal
+    const dataAwal = [
+        { nama: "Davina Karamoy", status: "Kenangan" },
+        { nama: "Anya Geraldin", status: "Sudah Move On" },
+        { nama: "Ayu Tingting", status: "Tinggal Kenangan" }
+    ];
 
+    // Ambil data dari localStorage
+    let mantan = JSON.parse(
+        localStorage.getItem("daftarMantanNaupal")
+    );
+
+    if (!Array.isArray(mantan)) {
+        mantan = dataAwal;
+        simpanData();
+    }
+
+    const form = document.getElementById("formMantan");
+    const inputNama = document.getElementById("nama");
+    const inputStatus = document.getElementById("status");
+    const pencarian = document.getElementById("searchMantan");
+    const daftar = document.getElementById("daftarMantan");
+    const pesanKosong = document.getElementById("pesanKosong");
+
+    // Simpan data ke browser
+    function simpanData() {
+        localStorage.setItem(
+            "daftarMantanNaupal",
+            JSON.stringify(mantan)
+        );
+    }
+
+    // Tampilkan daftar mantan dan tombol hapus
+    function tampilkanMantan(keyword = "") {
+        daftar.replaceChildren();
+
+        const hasil = mantan
+            .map((item, index) => ({ ...item, index }))
+            .filter(item =>
+                item.nama.toLowerCase().includes(
+                    keyword.trim().toLowerCase()
+                )
+            );
+
+        hasil.forEach((item) => {
+            const li = document.createElement("li");
+
+            const judul = document.createElement("h3");
+            judul.textContent = item.nama;
+
+            const nama = document.createElement("p");
+            nama.textContent = "Nama: " + item.nama;
+
+            const status = document.createElement("p");
+            status.textContent = "Status: " + item.status;
+
+            // Membuat tombol hapus
+            const tombolHapus = document.createElement("button");
+            tombolHapus.textContent = "Hapus";
+            tombolHapus.type = "button";
+            tombolHapus.className = "btn-hapus";
+
+            tombolHapus.addEventListener("click", function() {
+                const yakin = confirm(
+                    "Yakin ingin menghapus " + item.nama + "?"
+                );
+
+                if (yakin) {
+                    mantan.splice(item.index, 1);
+
+                    simpanData();
+                    tampilkanMantan(pencarian.value);
+                }
+            });
+
+            li.append(judul, nama, status, tombolHapus);
+            daftar.appendChild(li);
+        });
+
+        pesanKosong.hidden = hasil.length !== 0;
+    }
+
+    // Tambah mantan baru
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const namaBaru = inputNama.value.trim();
+        const statusBaru = inputStatus.value;
+
+        if (!namaBaru || !statusBaru) {
+            return;
+        }
+
+        mantan.push({
+            nama: namaBaru,
+            status: statusBaru
+        });
+
+        simpanData();
+        tampilkanMantan(pencarian.value);
+
+        form.reset();
+        inputNama.focus();
+    });
+
+    // Cari mantan secara langsung
+    pencarian.addEventListener("input", function() {
+        tampilkanMantan(pencarian.value);
+    });
+
+    // Tampilkan data saat halaman dibuka
+    tampilkanMantan();
+</script>
+
+</body>
 </html>
