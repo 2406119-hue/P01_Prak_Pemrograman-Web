@@ -1,0 +1,189 @@
+/* Reset ringan */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    min-height: 100vh;
+    padding: 36px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    color: #1f2937;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 720px;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(249, 115, 22, 0.12);
+    border: 1px solid #fed7aa;
+}
+
+/* ===== HEADER ===== */
+.app-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.badge {
+    display: inline-block;
+    background: #fed7aa;
+    color: #9a3412;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+
+.app-header h1 {
+    font-size: 26px;
+    color: #c2410c;
+    margin-bottom: 6px;
+}
+
+.tagline {
+    font-size: 13px;
+    color: #78716c;
+}
+
+/* ===== CONTROL PANEL ===== */
+.control-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.btn-load {
+    background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+    color: #ffffff;
+    border: none;
+    padding: 11px 26px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.35);
+}
+
+.btn-load:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(249, 115, 22, 0.5);
+}
+
+.btn-load:disabled {
+    background: #fed7aa;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.feedback {
+    font-size: 13px;
+    color: #57534e;
+    text-align: center;
+    padding: 10px 16px;
+    background: #fff7ed;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.feedback.is-error {
+    background: #fee2e2;
+    color: #b91c1c;
+    font-weight: 600;
+}
+
+/* ===== EMPLOYEE CONTAINER ===== */
+.employee-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.employee-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #fffbf5;
+    border: 1px solid #fed7aa;
+    border-radius: 10px;
+    padding: 14px 16px;
+    position: relative;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.employee-item:hover {
+    background: #ffffff;
+    border-color: #fb923c;
+}
+
+.avatar {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f97316, #fdba74);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.5px;
+}
+
+.employee-detail {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.employee-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #9a3412;
+    margin-bottom: 3px;
+}
+
+.employee-detail p {
+    font-size: 12.5px;
+    color: #57534e;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.employee-index {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fb923c;
+}
+
+/* Responsif */
+@media (max-width: 480px) {
+    .wrapper {
+        padding: 20px 16px;
+    }
+
+    .app-header h1 {
+        font-size: 22px;
+    }
+
+    .employee-item {
+        padding: 12px;
+    }
+}
